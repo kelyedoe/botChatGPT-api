@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Chat GPT API</title>
+</head>
+<body>
+    <div class="chat__question">
+        <input type="text" id="prompt" class="prompt" placeholder="poser votre question ici ...">
+        <button onclick="callGPTAPI()" class="chat_submit">Réponse</button>
+    </div>
+    
+    <div class="chat__response">
+        <p id="results"></p>
+    </div>
+
+    <script>
+       // Assurez vous dde remplacer API_KEY par la clé de votre compte sur RapidAPI
+
+        function callGPTAPI(){
+            const prompt = document.getElementById('prompt')
+            const results = document.getElementById('results')
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'X-RapidAPI-Key': 'api_key', 
+                    'X-RapidAPI-Host': 'openai80.p.rapidapi.com'
+                },
+                body: ` 
+                    {
+                        "model":"gpt-3.5-turbo",
+                        "messages":[{
+                            "role":"user",
+                            "content": "${prompt.value}"
+                        }]
+                    }` 
+                
+            };
+
+            fetch('https://openai80.p.rapidapi.com/chat/completions', options)
+                .then(response => response.json())
+                .then(data => {
+                    if(data.choices && data.choices.length > 0){
+                        results.innerText =data.choices[0].message.content;
+                    }else{
+                        console.error("Réponse invalide", data)
+                    }
+                    
+                })
+                .catch(err => console.error(err));
+        }
+    </script>
+</body>
+</html>

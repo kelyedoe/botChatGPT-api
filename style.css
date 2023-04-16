@@ -1,0 +1,26 @@
+.chat__question{
+    text-align: center;
+    margin: 7rem;
+    
+}
+.prompt{
+    height: 60px;
+    width: 500px;
+    padding: 1.2rem;
+    font-size: 1.3rem;
+}
+.chat_submit{
+    height: 65px;
+    width: 100px;
+    color: #fff;
+    background-color: #0c1022;
+    border-style: none;
+    font-size: 1.2rem;
+    border-radius: 2px;
+    
+    
+}
+.chat__response{
+    margin: 7rem;
+    padding: 3rem;
+}
